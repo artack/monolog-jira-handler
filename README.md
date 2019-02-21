@@ -12,7 +12,7 @@ Developed by [ARTACK WebLab GmbH](https://www.artack.ch) in Zurich, Switzerland.
 
 Introduction
 ------------
-This handler will write the Logs to a JIRA instance. The handler will calculate a hash over the log-data except 
+This handler will write the logs to a JIRA instance. The handler will calculate a hash over the log-data except 
 time sensitive data. It then will query the JIRA REST API to determe if there is already a JIRA Issue with the
 corresponding hash. If so, the handler will do nothing. If there is no issue matching the hash the handler will 
 create a new issue with the content of the log entry.

@@ -1,2 +1,7 @@
+.phpunit.result.cache
+.php_cs.cache
+
 vendor/
 log/
+tests/test.php
+tests/*.log
