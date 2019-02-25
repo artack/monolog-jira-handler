@@ -29,6 +29,8 @@ class JiraHandler extends BatchHandler
     private $streamFactory;
     private $httpClient;
 
+    private $createdIssueId;
+
     public function __construct(string $hostname, string $username, string $password, string $jql, string $hashFieldName, string $projectKey, string $issueTypeName, bool $withComments = false, string $counterFieldName = null, HttpClient $httpClient = null, $level = Logger::DEBUG, $bubble = true)
     {
         parent::__construct($level, $bubble);
@@ -159,7 +161,9 @@ class JiraHandler extends BatchHandler
         ]);
         $uri = $this->urlFactory->createUri(sprintf('https://%s/rest/api/2/issue', $this->hostname));
         $request = $this->requestFactory->createRequest('POST', $uri)->withBody($this->streamFactory->createStream($body));
-        $this->httpClient->sendRequest($request);
+        $response = $this->httpClient->sendRequest($request);
+        $data = json_decode($response->getBody()->getContents(), true);
+        $this->createdIssueId = $data['id'];
     }
 
     protected function parseProjectId(array $data): int
@@ -179,5 +183,10 @@ class JiraHandler extends BatchHandler
         return array_values(array_filter($data[$part], function ($item) use ($fieldName) {
             return $item['name'] === $fieldName;
         }))[0]['id'];
+    }
+
+    public function getCreatedIssueId()
+    {
+        return $this->createdIssueId;
     }
 }

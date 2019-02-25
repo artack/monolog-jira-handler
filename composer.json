@@ -26,7 +26,8 @@
         "php-http/guzzle6-adapter": "^2.0",
         "nyholm/psr7": "^1.1",
         "phpunit/phpunit": "^7.0",
-        "symfony/var-dumper": "^4.2"
+        "symfony/var-dumper": "^4.2",
+        "php-http/mock-client": "^1.3"
     },
     "autoload": {
         "psr-4": {"Artack\\Monolog\\JiraHandler\\": "src/"}
