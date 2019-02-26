@@ -146,6 +146,7 @@ class JiraHandler extends BatchHandler
         $projectId = $this->parseProjectId($data);
         $issueType = $this->parseIssueType($data, $this->issueTypeName);
         $issueTypeId = (int) $issueType['id'];
+        $summary = sprintf('%s: %s', $highestRecord['level_name'], $highestRecord['message']);
 
         $body = json_encode([
             'fields' => [
@@ -153,7 +154,7 @@ class JiraHandler extends BatchHandler
                     'id' => $projectId,
                 ],
                 'issuetype' => ['id' => $issueTypeId],
-                'summary' => sprintf('%s: %s', $highestRecord['level_name'], $highestRecord['message']),
+                'summary' => strlen($summary) > 255 ? substr($summary, 0, 252).'...' : $summary,
                 'description' => $content,
                 $hashFieldId => $hash,
                 $countFieldId => 1,
