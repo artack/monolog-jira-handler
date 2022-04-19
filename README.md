@@ -1,3 +1,7 @@
+> **ATTENTION:** This repository is archived and therefore readonly.
+
+---
+
 # JIRA Handler for Monolog
 
 [![Build Status](https://img.shields.io/travis/ARTACK/monolog-jira-handler.svg?style=flat)](https://travis-ci.org/ARTACK/monolog-jira-handler)
